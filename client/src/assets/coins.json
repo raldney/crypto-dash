@@ -1,0 +1,116 @@
+[
+  {
+    "cid": 1,
+    "value": "BTC",
+    "name": "Bitcoin",
+    "label": "Bitcoin (BTC)"
+  },
+  {
+    "cid": 1027,
+    "value": "ETH",
+    "name": "Ethereum",
+    "label": "Ethereum (ETH)"
+  },
+  {
+    "cid": 825,
+    "value": "USDT",
+    "name": "Tether",
+    "label": "Tether (USDT)"
+  },
+  {
+    "cid": 2010,
+    "value": "ADA",
+    "name": "Cardano",
+    "label": "Cardano (ADA)"
+  },
+  {
+    "cid": 4687,
+    "value": "BUSD",
+    "name": "Binance USD",
+    "label": "Binance USD (BUSD)"
+  },
+  {
+    "cid": 1839,
+    "value": "BNB",
+    "name": "Binance Coin",
+    "label": "Binance Coin (BNB)"
+  },
+  {
+    "cid": 4066,
+    "value": "CHZ",
+    "name": "Chiliz",
+    "label": "Chiliz (CHZ)"
+  },
+  {
+    "cid": 74,
+    "value": "DOGE",
+    "name": "Dogecoin",
+    "label": "Dogecoin (DOGE)"
+  },
+  {
+    "cid": 4206,
+    "value": "WIN",
+    "name": "WINkLink",
+    "label": "WINkLink (WIN)"
+  },
+  {
+    "cid": 52,
+    "value": "XRP",
+    "name": "XRP",
+    "label": "XRP (XRP)"
+  },
+  {
+    "cid": 3718,
+    "value": "BTT",
+    "name": "BitTorrent",
+    "label": "BitTorrent (BTT)"
+  },
+  {
+    "cid": 3890,
+    "value": "MATIC",
+    "name": "Polygon",
+    "label": "Polygon (MATIC)"
+  },
+  {
+    "cid": 6636,
+    "value": "DOT",
+    "name": "Polkadot",
+    "label": "Polkadot (DOT)"
+  },
+  {
+    "cid": 1975,
+    "value": "LINK",
+    "name": "Chainlink",
+    "label": "Chainlink (LINK)"
+  },
+  {
+    "cid": 2,
+    "value": "LTC",
+    "name": "Litecoin",
+    "label": "Litecoin (LTC)"
+  },
+  {
+    "cid": 5994,
+    "value": "SHIB",
+    "name": "SHIBA INU",
+    "label": "SHIBA INU (SHIB)"
+  },
+  {
+    "cid": 2682,
+    "value": "HOT",
+    "name": "Holo",
+    "label": "Holo (HOT)"
+  },
+  {
+    "cid": 2130,
+    "value": "ENJ",
+    "name": "Enjin Coin",
+    "label": "Enjin Coin (ENJ)"
+  },
+  {
+    "cid": 1321,
+    "value": "ETC",
+    "name": "Ethereum Classic",
+    "label": "Ethereum Classic (ETC)"
+  }
+]
