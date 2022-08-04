@@ -4,7 +4,7 @@ import CoinCard from "@/components/CoinCard.vue";
 
 <template>
   <main class="w-full h-full">
-    <div class="grid grid-cols-5 gap-4 m-4">
+    <div class="grid grid-cols-3 xl:grid-cols-5 gap-4 m-4">
       <CoinCard />
       <CoinCard />
       <CoinCard />
