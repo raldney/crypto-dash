@@ -1,21 +1,19 @@
 <script setup>
-import CoinCard from "@/components/CoinCard.vue";
+import DashBoard from "@/components/Dashboard.vue";
+import Navbar from "@/components/Navbar.vue";
+import { useCryptoStore } from "@/stores/crypto";
+import { useAuthStore } from "@/stores/auth";
+
+const cryptoStore = useCryptoStore();
+const authStore = useAuthStore();
+
+cryptoStore.loadCoinList(authStore.user.api); // inicializa a lista de cryptos
 </script>
 
 <template>
+  <Navbar />
+
   <main class="w-full h-full">
-    <div class="grid grid-cols-3 xl:grid-cols-5 gap-4 m-4">
-      <CoinCard />
-      <CoinCard />
-      <CoinCard />
-      <CoinCard />
-      <CoinCard />
-      <CoinCard />
-      <CoinCard />
-      <CoinCard />
-      <CoinCard />
-      <CoinCard />
-      <CoinCard />
-    </div>
+    <DashBoard />
   </main>
 </template>
