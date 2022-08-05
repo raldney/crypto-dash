@@ -10,7 +10,7 @@ export const useAuthStore = defineStore({
   }),
   actions: {
     register(user) {
-      if(!user.api_key){
+      if(!user.api){
         createToast("Erro ao realizar o cadastro, por favor informa uma API_KEY!", {
           type: "danger",
         });
