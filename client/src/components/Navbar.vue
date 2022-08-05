@@ -1,11 +1,10 @@
 <script>
-import coins from "@/assets/coins.json";
-import { init, add, close} from "@/services/cripto_compare.js";
-
+import { useCryptoStore } from "../stores/crypto";
+import { useAuthStore } from "../stores/auth";
+import { mapState, mapActions } from "pinia";
 export default {
   data() {
     return {
-      currencyList: coins,
       baseCurrency: {},
       select: null,
       showOptions: false,
@@ -13,29 +12,34 @@ export default {
     };
   },
   methods: {
-    closeConnection: close,
+    ...mapActions(useCryptoStore, ["addCoin"]),
+    ...mapActions(useAuthStore, ["logout"]),
+    closeConnection() {
+      close();
+    },
     setInput(value) {
       this.selectedCoins.push(value);
-      add(value);
-      console.log(value);
-      this.select = value;
+      this.addCoin(value);
       this.showOptions = false;
     },
     resultQuery() {
       if (this.select) {
-        return this.currencyList.filter((item) => {
+        //filtra o valor informado no input para exibir apenas as cryptos relacionadas
+        return this.coinslist.filter((item) => {
           return this.select
             .toLowerCase()
             .split(" ")
-            .every((v) => item.label.toLowerCase().includes(v));
+            .every((v) => item.FullName.toLowerCase().includes(v));
         });
       } else {
         return [];
       }
     },
   },
-  created() {
-    init();
+  computed: {
+    ...mapState(useCryptoStore, {
+      coinslist: "coinlist",
+    }),
   },
 };
 </script>
@@ -46,28 +50,27 @@ export default {
     <!-- search bar -->
     <div class="sm:block justify-start px-2">
       <div
-        class="mt-1 relative border border-gray-900 overflow-hidden rounded-md shadow-md"
+        class="mt-1 relative border border-gray-600 overflow-hidden rounded-md shadow-md"
       >
         <input
-          id="email"
           @keyup="showOptions = true"
           v-model="select"
           class="w-full px-3 py-3"
           autocomplete="off"
-          placeholder="Crypto name"
+          placeholder="Digite o nome da Crypto..."
         />
       </div>
       <div
         v-show="resultQuery().length && showOptions"
-        class="absolute w-1/5 z-50 bg-white border border-gray-300 mt-1 max-height-48 overflow-hidden overflow-y-scroll rounded-md shadow-md"
+        class="absolute w-2/5 z-50 bg-white border border-gray-300 mt-1 max-height-48 overflow-hidden overflow-y-scroll rounded-md shadow-md"
       >
         <ul class="py-1">
           <li
             v-for="value in resultQuery()"
-            @click="setInput(value.value)"
+            @click="setInput(value)"
             class="px-3 py-2 cursor-pointer hover:bg-gray-200"
           >
-            {{ value.label }}
+            {{ value.FullName }}
           </li>
         </ul>
       </div>
@@ -78,7 +81,8 @@ export default {
     <div class="flex-initial">
       <div class="flex justify-end items-center relative">
         <div class="flex mr-4 items-center">
-          <button type="button" @click="closeConnection()"
+          <button
+            type="button"
             class="inline-block py-2 px-3 hover:bg-gray-200 rounded-full"
             href="#"
           >
@@ -93,26 +97,10 @@ export default {
               type="button"
               class="inline-block py-2 px-3 hover:bg-gray-200 rounded-full relative"
             >
-              <div class="flex items-center h-5">
-                <div class="_xpkakx">
-                  <svg
-                    viewBox="0 0 16 16"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                    role="presentation"
-                    focusable="false"
-                    style="
-                      display: block;
-                      height: 16px;
-                      width: 16px;
-                      fill: currentcolor;
-                    "
-                  >
-                    <path
-                      d="m8.002.25a7.77 7.77 0 0 1 7.748 7.776 7.75 7.75 0 0 1 -7.521 7.72l-.246.004a7.75 7.75 0 0 1 -7.73-7.513l-.003-.245a7.75 7.75 0 0 1 7.752-7.742zm1.949 8.5h-3.903c.155 2.897 1.176 5.343 1.886 5.493l.068.007c.68-.002 1.72-2.365 1.932-5.23zm4.255 0h-2.752c-.091 1.96-.53 3.783-1.188 5.076a6.257 6.257 0 0 0 3.905-4.829zm-9.661 0h-2.75a6.257 6.257 0 0 0 3.934 5.075c-.615-1.208-1.036-2.875-1.162-4.686l-.022-.39zm1.188-6.576-.115.046a6.257 6.257 0 0 0 -3.823 5.03h2.75c.085-1.83.471-3.54 1.059-4.81zm2.262-.424c-.702.002-1.784 2.512-1.947 5.5h3.904c-.156-2.903-1.178-5.343-1.892-5.494l-.065-.007zm2.28.432.023.05c.643 1.288 1.069 3.084 1.157 5.018h2.748a6.275 6.275 0 0 0 -3.929-5.068z"
-                    ></path>
-                  </svg>
-                </div>
+              <div class="flex items-center h-5" >
+                <button type="button" @click="logout">
+                  <img class="w-8 h-8" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABmJLR0QA/wD/AP+gvaeTAAABX0lEQVRoge2aPU7DQBCFvyAUiQqJtFwE5RochjIN+blJTsAdKAwUdLQkEWUuABRZiyTgsA/H+K21TxrJxY71Pu3IuztegD4wA5bAh0ksgEnwFq2pgfGqGCsgi5B0pSQ1rCFfMxOtkt5Nkq+TBo38qzKImzKIm5xBbpTBp025OIJmwJmS4LqOSHIuLUmuIHPgDjhXkhxLq2Dj6R4BxhHkEnhh46sALmKSHEHgDzCuILAL88AvMM4gIMC4g8B3mMFPg1IAgQiYVEBgF+aRPZiUQOAATGogUAFTB6QHPG29o60o6u61esB7zXccTbm0WlLlZzglkINrSSognVgQo/Zb7iDR23lnEOlM4grSiYNVZ466z4jNB9dO4xuwAq6BdWyS44zIcm3QyXIHGSmDXUtrhOjLFST/1U1aGcRNnQJZhudhm0b2VHqRLtVMaL8vVRW3Ckg/wJTXnRziNUBEXzz7BOOAODtHOlVVAAAAAElFTkSuQmCC">
+                </button>
               </div>
             </button>
           </div>
