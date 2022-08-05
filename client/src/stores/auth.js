@@ -10,15 +10,22 @@ export const useAuthStore = defineStore({
   }),
   actions: {
     register(user) {
-      localStorage.setItem("user", JSON.stringify(user));
-      this.user = user;
-      createToast(
-        "Muito obrigado por realizar seu cadastro! " + user.username,
-        {
-          type: "success",
-        }
-      );
-      router.push("/");
+      if(!user.api_key){
+        createToast("Erro ao realizar o cadastro, por favor informa uma API_KEY!", {
+          type: "danger",
+        });
+      }else{
+        localStorage.setItem("user", JSON.stringify(user));
+        this.user = user;
+        createToast(
+            "Muito obrigado por realizar seu cadastro! " + user.username,
+            {
+              type: "success",
+            }
+        );
+        router.push("/");
+      }
+
     },
     login(username, password) {
       const user = JSON.parse(localStorage.getItem("user"));
