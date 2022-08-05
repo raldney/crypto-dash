@@ -104,6 +104,8 @@ ___
     sudo docker-compose down -v
     ```
 ___
+## Pontos não alcançados
+   1. Infelizmente não consegui cobrir o sistema com testes automatizados 
 
 ## Possíveis melhorias
 
@@ -116,7 +118,7 @@ Favorecendo assim a facilidade de uso e consulta das informações da plataforma
 a API_KEY esta exposta podendo ser "pega" por pessoas maliciosas.
 
 ### Gráficos
-   1. Para uma melhor visualização da ferramenta seria interessante inserir graficos para realizar um melhor acompanhamento.
+   1. Para uma melhor visualização da ferramenta seria interessante inserir gráficos para realizar um melhor acompanhamento.
 
 ### Saldo 
    1. Outro ponto interessante seria cadastrar quanto de cada moeda está sob custódia e assim realizar o cálculo do balanço em tempo real.

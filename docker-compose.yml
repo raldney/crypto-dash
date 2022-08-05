@@ -14,7 +14,7 @@ services:
     build:
       context: ./client/.
       target: develop-stage
-    command: 'npm run dev'
+    command: /bin/sh -c "npm install && npm run dev"
     volumes:
       - ./client:/app
 
