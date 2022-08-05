@@ -71,7 +71,7 @@
             </small>
 
             <!-- Form -->
-            <form class="mt-4">
+            <form class="mt-4" v-on:submit.prevent="authStore.login(user.username, user.password)">
               <div class="mb-3">
                 <label class="mb-2 block text-xs font-semibold">Usuário</label>
                 <input
@@ -94,7 +94,6 @@
 
               <div class="mb-3">
                 <button
-                  @click="authStore.login(user.username, user.password)"
                   class="mb-1.5 block w-full text-center text-white bg-blue-700 hover:bg-purple-900 px-2 py-1.5 rounded-md"
                 >
                   Acessar
