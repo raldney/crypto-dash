@@ -1,5 +1,14 @@
 version: '3.8'
 services:
+  proxy:
+    build: ./nginx/.
+    links:
+      - app
+    ports:
+      - "80:80"
+    depends_on:
+      - app
+    command: "nginx -g \"daemon off;\""
   app:
     container_name: app-crypto-dash
     build:
@@ -8,7 +17,5 @@ services:
     command: 'npm run dev'
     volumes:
       - ./client:/app
-    ports:
-      - "8080:8080"
 
 
